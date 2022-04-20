@@ -36,10 +36,10 @@
        ;;hydra
        indent-guides     ; highlighted indent columns
        ;;(ligatures +fira)         ; ligatures and symbols to make your code pretty again
-       ;; minimap           ; show a map of the code on the side
+       minimap           ; show a map of the code on the side
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
-       neotree           ; a project drawer, like NERDTree for vim
+       ;;neotree           ; a project drawer, like NERDTree for vim
        ophints           ; highlight the region an operation acts on
        (popup +defaults)   ; tame sudden yet inevitable temporary windows
        ;;tabs              ; a tab bar for Emacs
@@ -59,7 +59,7 @@
        ;;lispy             ; vim for lisp, for people who don't like vim
        multiple-cursors  ; editing in many places at once
        ;;objed             ; text object editing for the innocent
-       ;;parinfer          ; turn lisp into python, sort of
+       (parinfer +rust)          ; turn lisp into python, sort of
        ;;rotate-text       ; cycle region at point between text candidates
        snippets          ; my elves. They type so I don't have to
        word-wrap         ; soft wrapping with language-aware indent
@@ -99,7 +99,7 @@
        ;;pass              ; password manager for nerds
        ;;pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
-       ;;rgb               ; creating color strings
+       rgb               ; creating color strings
        ;;taskrunner        ; taskrunner for all your projects
        ;;terraform         ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
@@ -149,7 +149,7 @@
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       org               ; organize your plain life in plain text
+       (org +pandoc +pretty +hugo +odragndrop)   ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
@@ -173,7 +173,7 @@
        ;;zig               ; C, but simpler
 
        :email
-       ;;(mu4e +org +gmail)
+       (mu4e +org +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
 
