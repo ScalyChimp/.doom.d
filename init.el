@@ -31,11 +31,11 @@
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       ;;(emoji +unicode)  ; 🙂
+       (emoji +unicode)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        indent-guides     ; highlighted indent columns
-       (ligatures +fira)         ; ligatures and symbols to make your code pretty again
+       (ligatures)         ; ligatures and symbols to make your code pretty again
        minimap           ; show a map of the code on the side
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
@@ -52,6 +52,7 @@
        ;;zen               ; distraction-free coding or writing
 
        :editor
+       ;;(evil +everywhere)
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
       (format +onsave)  ; automated prettiness
@@ -59,10 +60,11 @@
        ;;lispy             ; vim for lisp, for people who don't like vim
        multiple-cursors  ; editing in many places at once
        ;;objed             ; text object editing for the innocent
-       (parinfer +rust)          ; turn lisp into python, sort of
+       ;;(parinfer +rust)          ; turn lisp into python, sort of
        ;;rotate-text       ; cycle region at point between text candidates
        snippets          ; my elves. They type so I don't have to
        word-wrap         ; soft wrapping with language-aware indent
+
 
        :emacs
        dired             ; making dired pretty [functional]
@@ -72,8 +74,8 @@
        vc                ; version-control and Emacs, sitting in a tree
 
        :term
-       ;;eshell            ; the elisp shell that works everywhere
-       shell             ; simple shell REPL for Emacs
+       eshell            ; the elisp shell that works everywhere
+       ;;shell             ; simple shell REPL for Emacs
        ;;term              ; basic terminal emulator for Emacs
        vterm             ; the best terminal emulation in Emacs (requires CMake)
 
@@ -173,7 +175,7 @@
        ;;zig               ; C, but simpler
 
        :email
-       (mu4e +org +gmail)
+       ;;(mu4e +org +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
 
