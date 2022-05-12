@@ -75,3 +75,16 @@
 ;; they are implemented.
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
+
+;; dired/ranger keybindings
+(map! :leader
+      (:prefix ("d" . "dired")
+       :desc "Open dired" "d" #'dired
+       :desc "Open ranger" "r" #'ranger
+       :desc "Dired jump to current" "j" #'dired-jump)
+      (:after dired
+       (:map dired-mode-map
+        :desc "Dired view file" "d v" #'dired-view-file)))
+
+;; ranger show hidden files
+(setq ranger-show-hidden t)
