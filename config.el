@@ -86,6 +86,8 @@
        (:map dired-mode-map
         :desc "Dired view file" "d v" #'dired-view-file)))
 
+(map! :leader
+      :desc "hydra window macro" "W" #'+hydra/window-nav/body)
 ;; ranger show hidden files
 (setq ranger-show-hidden t)
 (beacon-mode 1)
