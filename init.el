@@ -52,7 +52,7 @@
        ;;zen               ; distraction-free coding or writing
 
        :editor
-       ;;(evil +everywhere)
+       (evil +everywhere)
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
       (format +onsave)  ; automated prettiness
@@ -67,7 +67,7 @@
 
 
        :emacs
-       dired             ; making dired pretty [functional]
+       (dired +icons)           ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        ibuffer         ; interactive buffer management
        undo              ; persistent, smarter undo for your inevitable mistakes
