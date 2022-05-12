@@ -1,3 +1,3 @@
-uh backup of my emacs config
+uh backup of my doom emacs config
 
 dunno why I used git.
