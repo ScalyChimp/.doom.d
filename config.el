@@ -88,3 +88,4 @@
 
 ;; ranger show hidden files
 (setq ranger-show-hidden t)
+(beacon-mode 1)
