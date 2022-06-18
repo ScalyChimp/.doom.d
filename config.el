@@ -115,3 +115,5 @@
 
 (setq evil-move-cursor-back nil)
 
+(setq dirvish-override-dired-mode 't)
+
