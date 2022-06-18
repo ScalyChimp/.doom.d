@@ -85,6 +85,8 @@
        (:map dired-mode-map
         :desc "Dired view file" "d v" #'dired-view-file)))
 
+(map! :desc "yank from kill ring" "M-y" #'yank-from-kill-ring)
+
 (map! :leader
       :desc "hydra window macro" "W" #'+hydra/window-nav/body)
 ;; ranger show hidden files
