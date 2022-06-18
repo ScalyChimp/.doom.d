@@ -80,7 +80,8 @@
       (:prefix ("d" . "dired")
        :desc "Open dired" "d" #'dired
        :desc "Open ranger" "r" #'ranger
-       :desc "Dired jump to current" "j" #'dired-jump)
+       :desc "Dired jump to current" "j" #'dired-jump
+       :desc "open dirvish in new window" "v" #'dirvish)
       (:after dired
        (:map dired-mode-map
         :desc "Dired view file" "d v" #'dired-view-file)))
