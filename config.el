@@ -31,10 +31,10 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-old-hope)
+(setq doom-theme 'doom-henna)
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -80,21 +80,18 @@
       (:prefix ("d" . "dired")
        :desc "Open dired" "d" #'dired
        :desc "Open ranger" "r" #'ranger
-       :desc "Dired jump to current" "j" #'dired-jump)
-      (:after dired
-       (:map dired-mode-map
-        :desc "Dired view file" "d v" #'dired-view-file)))
+       :desc "Dired" "j" #'dired-jump))
 
 (map! :leader
       :desc "hydra window macro" "W" #'+hydra/window-nav/body)
-;; ranger show hidden files
-(setq ranger-show-hidden t)
-(beacon-mode 1)
 
+(setq ranger-show-hidden t)
+
+(beacon-mode 1)
 
 (define-globalized-minor-mode global-rainbow-mode rainbow-mode
   (lambda () (rainbow-mode 1)))
-(global-rainbow-mode 1 )
+(global-rainbow-mode 1)
 
 ;; make C-x o not ignore treemacs side-windows
 (after! (:and treemacs ace-window)
