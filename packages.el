@@ -52,3 +52,4 @@
 (package! beacon)
 (package! dirvish)
 (package! org-modern)
+(package! toml-mode)
