@@ -81,7 +81,7 @@
        :desc "Open dired" "d" #'dired
        :desc "Open ranger" "r" #'ranger
        :desc "Dired jump to current" "j" #'dired-jump
-       :desc "open dirvish in new window" "v" #'dirvish)
+       :desc "open dirvish in new window" "v" #'dirvish))
 
 (map! :desc "yank from kill ring" "M-y" #'yank-from-kill-ring)
 
