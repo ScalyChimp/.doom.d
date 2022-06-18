@@ -89,6 +89,7 @@
 
 (map! :leader
       :desc "hydra window macro" "W" #'+hydra/window-nav/body)
+
 ;; ranger show hidden files
 (setq ranger-show-hidden t)
 (beacon-mode 1)
@@ -96,7 +97,7 @@
 
 (define-globalized-minor-mode global-rainbow-mode rainbow-mode
   (lambda () (rainbow-mode 1)))
-(global-rainbow-mode 1 )
+(global-rainbow-mode 1)
 
 ;; make C-x o not ignore treemacs side-windows
 (after! (:and treemacs ace-window)
