@@ -52,3 +52,4 @@
 (package! beacon)
 (package! org-modern)
 (package! toml-mode)
+(package! i3wm-config-mode)
