@@ -107,10 +107,11 @@
   '(org-level-2 ((t (:inherit outline-2 :height 1.3))))
   '(org-level-3 ((t (:inherit outline-3 :height 1.2))))
   '(org-level-4 ((t (:inherit outline-4 :height 1.1))))
-  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
-)
+  '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
+
 
 (setq evil-move-cursor-back nil)
 
 (setq dirvish-override-dired-mode 't)
 
+(set-frame-parameter (selected-frame) 'alpha '(98 . 80))
