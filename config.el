@@ -79,9 +79,9 @@
 (map! :leader
       (:prefix ("d" . "dired")
        :desc "Open dired" "d" #'dired
-       :desc "Open ranger" "r" #'ranger
-       :desc "Dired jump to current" "j" #'dired-jump
-       :desc "open dirvish in new window" "v" #'dirvish))
+       :desc "dirvish dispatch" "s" #'dirvish-dispatch
+       :desc "dirvish in ranger style" "r" #'dirvish
+       :desc "Dired jump to current" "j" #'dired-jump))
 
 (map! :desc "yank from kill ring" "M-y" #'yank-from-kill-ring)
 
