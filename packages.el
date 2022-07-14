@@ -53,3 +53,4 @@
 (package! org-modern)
 (package! toml-mode)
 (package! i3wm-config-mode)
+(package! exec-path-from-shell)

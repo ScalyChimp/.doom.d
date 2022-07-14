@@ -115,3 +115,5 @@
 (setq dirvish-override-dired-mode 't)
 
 (set-frame-parameter (selected-frame) 'alpha '(100 . 80))
+
+(exec-path-from-shell-initialize)
