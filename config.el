@@ -114,4 +114,4 @@
 
 (setq dirvish-override-dired-mode 't)
 
-(set-frame-parameter (selected-frame) 'alpha '(98 . 80))
+(set-frame-parameter (selected-frame) 'alpha '(100 . 80))
