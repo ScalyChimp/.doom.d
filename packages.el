@@ -48,8 +48,6 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
-(package! evil-tutor)
-(package! beacon)
 (package! org-modern)
 (package! toml-mode)
 (package! i3wm-config-mode)
