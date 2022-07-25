@@ -75,13 +75,15 @@
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
-;; dired/ranger keybindings
+;; dired/dirvish keybindings
 (map! :leader
       (:prefix ("d" . "dired")
        :desc "Open dired" "d" #'dired
        :desc "dirvish dispatch" "s" #'dirvish-dispatch
        :desc "dirvish in ranger style" "r" #'dirvish
        :desc "Dired jump to current" "j" #'dired-jump))
+
+(setq dirvish-override-dired-mode 't)
 
 (map! :desc "yank from kill ring" "M-y" #'yank-from-kill-ring)
 
@@ -116,8 +118,6 @@
 
 
 (setq evil-move-cursor-back nil)
-
-(setq dirvish-override-dired-mode 't)
 
 (set-frame-parameter (selected-frame) 'alpha '(100 . 80))
 
