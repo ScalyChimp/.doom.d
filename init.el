@@ -96,7 +96,7 @@
        ;;gist              ; interacting with github gists
       lookup              ; navigate your code and its documentation
       (lsp +peek)               ; M-x vscode
-      (magit +forge)             ; a git porcelain for Emacs
+      magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
       pdf               ; pdf enhancements
@@ -176,7 +176,7 @@
        ;;zig               ; C, but simpler
 
       :email
-      (mu4e +org +gmail)
+       ;; (mu4e +org +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
 
@@ -184,7 +184,7 @@
        ;;calendar
        ;;emms
        ;;everywhere        ; *leave* Emacs!? You must be joking
-      irc               ; how neckbeards socialize
+      ;; irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
 
