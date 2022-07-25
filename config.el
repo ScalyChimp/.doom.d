@@ -103,10 +103,6 @@
   (lambda () (rainbow-mode 1)))
 (global-rainbow-mode 1)
 
-;; make C-x o not ignore treemacs side-windows
-(after! (:and treemacs ace-window)
-  (setq aw-ignored-buffers (delq 'treemacs-mode aw-ignored-buffers)))
-
 (setq org-hide-emphasis-markers t)
 
 (custom-set-faces
