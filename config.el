@@ -85,6 +85,12 @@
 
 (map! :desc "yank from kill ring" "M-y" #'yank-from-kill-ring)
 
+;; emacs and vim fusion.
+(map! :nvi "M-h" #'back-to-indentation
+      :nvi "M-j" #'forward-paragraph
+      :nvi "M-k" #'backward-paragraph
+      :nvi "M-l" #'end-of-line)
+
 (map! :leader
       :desc "hydra window macro" "W" #'+hydra/window-nav/body)
 
