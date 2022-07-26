@@ -54,3 +54,5 @@
 (package! toml-mode)
 (package! i3wm-config-mode)
 (package! exec-path-from-shell)
+(package! org-appear :recipe (:host github :repo "awth13/org-appear")
+  :pin "8dd1e564153d8007ebc4bb4e14250bde84e26a34")
