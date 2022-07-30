@@ -117,7 +117,7 @@
 
 (set-frame-parameter (selected-frame) 'alpha '(100 . 80))
 
-(unless IS-WINDOWS exec-path-from-shell-initialize)
+(unless IS-WINDOWS #'exec-path-from-shell-initialize)
 
 (use-package! org-appear
   :hook (org-mode . org-appear-mode)
