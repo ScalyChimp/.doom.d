@@ -128,3 +128,6 @@
   ;; for proper first-time setup, `org-appear--set-elements'
   ;; needs to be run after other hooks have acted.
   (run-at-time nil nil #'org-appear--set-elements))
+(exec-path-from-shell-initialize)
+
+(add-hook! 'org-mode-hook #'global-org-modern-mode)
