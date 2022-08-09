@@ -135,3 +135,13 @@
          evil-snipe-repeat-scope 'whole-line))
 
 (add-hook! 'org-mode-hook #'global-org-modern-mode)
+
+(add-hook 'c-mode-common-hook
+          (lambda () (modify-syntax-entry ?_ "w")))
+
+(define-key evil-outer-text-objects-map "w" 'evil-a-symbol)
+(define-key evil-inner-text-objects-map "w" 'evil-inner-symbol)
+(define-key evil-outer-text-objects-map "o" 'evil-a-word)
+(define-key evil-inner-text-objects-map "o" 'evil-inner-word)
+
+(defalias 'forward-evil-word 'forward-evil-symbol)
