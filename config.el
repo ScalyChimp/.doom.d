@@ -129,7 +129,9 @@
   ;; needs to be run after other hooks have acted.
   (run-at-time nil nil #'org-appear--set-elements))
 
-(setq evil-snipe-scope 'whole-line)
-(setq evil-snipe-repeat-scope 'whole-line)
+(after! evil-snipe
+        (setq
+         evil-snipe-scope 'whole-line
+         evil-snipe-repeat-scope 'whole-line))
 
 (add-hook! 'org-mode-hook #'global-org-modern-mode)
