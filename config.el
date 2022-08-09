@@ -130,4 +130,7 @@
   (run-at-time nil nil #'org-appear--set-elements))
 (exec-path-from-shell-initialize)
 
+(setq evil-snipe-scope 'whole-line)
+(setq evil-snipe-repeat-scope 'whole-line)
+
 (add-hook! 'org-mode-hook #'global-org-modern-mode)
