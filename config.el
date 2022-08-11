@@ -130,8 +130,10 @@
   (run-at-time nil nil #'org-appear--set-elements))
 
 (after! evil-snipe
-        (setq
-         evil-snipe-scope 'whole-line
-         evil-snipe-repeat-scope 'whole-line))
+  (evil-snipe-override-mode 1)
+  (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+  (setq
+   evil-snipe-scope 'whole-line
+   evil-snipe-repeat-scope 'whole-line))
 
 (add-hook! 'org-mode-hook #'global-org-modern-mode)
