@@ -136,6 +136,12 @@
    evil-snipe-scope 'whole-line
    evil-snipe-repeat-scope 'whole-line))
 
+(after! doom-modeline
+  (setq!
+   doom-modeline-enable-word-count t
+   doom-modeline-continuous-word-count-modes
+   '(markdown-mode gfm-mode org-mode text-mode)))
+
 (add-hook! 'org-mode-hook #'global-org-modern-mode)
 
 (add-hook 'c-mode-common-hook
