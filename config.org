@@ -1,0 +1,399 @@
+#+title: Doom Emacs Config
+#+author: scalychimp
+#+DESCRIPTION: scalychimp's insidous doom emacs config, copy at your own peril.
+#+STARTUP: showeverything
+
+* Table of Contents :toc:
+- [[#dired][Dired]]
+  - [[#keybindings][Keybindings]]
+  - [[#dirvish-override][Dirvish override]]
+- [[#doom][Doom]]
+  - [[#user-setup][User setup]]
+  - [[#font][Font]]
+  - [[#theme][Theme]]
+  - [[#line-numbers][Line Numbers]]
+- [[#org][Org]]
+  - [[#heading-size][Heading Size]]
+  - [[#appear][Appear]]
+  - [[#newlines][Newlines]]
+  - [[#modern][Modern]]
+  - [[#location][Location]]
+- [[#modeline][Modeline]]
+- [[#evil][Evil]]
+  - [[#snipe][Snipe]]
+  - [[#movement][Movement]]
+  - [[#cursor][Cursor]]
+  - [[#word-definition][Word definition]]
+- [[#screen][Screen]]
+  - [[#fullscreen-on-startup][Fullscreen on startup]]
+  - [[#transparency][Transparency]]
+- [[#yank-from-kill-ring][Yank from kill ring]]
+- [[#path][Path]]
+- [[#rainbow-mode][Rainbow mode]]
+- [[#external-configuration-files][External Configuration Files]]
+  - [[#initel][Init.el]]
+  - [[#packagesel][Packages.el]]
+
+* Dired
+** Keybindings
+Dired is nice, however doom has no keybindings for it by default, however ~SPC d~ is unused and makes keybindings both ergonomic and mnemonic.
+#+begin_src elisp
+(map! :leader
+      (:prefix ("d" . "dired")
+       :desc "Open dired" "d" #'dired
+       :desc "dirvish dispatch" "s" #'dirvish-dispatch
+       :desc "dirvish in ranger style" "r" #'dirvish
+       :desc "Dired jump to current" "j" #'dired-jump))
+#+end_src
+
+** Dirvish override
+#+begin_src  elisp
+(setq dirvish-override-dired-mode 't)
+#+end_src
+
+* Doom
+** User setup
+#+begin_src elisp
+(setq user-full-name "scalychimp"
+      user-mail-address "scalychimp@gmail.com")
+#+end_src
+** Font
+#+begin_src elisp
+(setq doom-font (font-spec :family "JetBrains Mono" :size 18 :weight 'regular))
+#+end_src
+
+** Theme
+#+begin_src elisp
+(setq doom-theme 'doom-gruvbox)
+#+end_src
+
+** Line Numbers
+#+begin_src elisp
+(setq display-line-numbers-type 't)
+#+end_src
+
+* Org
+** Heading Size
+Stolen from dt's doom config, this block slightly increases the size of org headings, which I find makes them stand out more.
+#+begin_src elisp
+(custom-set-faces
+  '(org-level-1 ((t (:inherit outline-1 :height 1.3))))
+  '(org-level-2 ((t (:inherit outline-2 :height 1.2))))
+  '(org-level-3 ((t (:inherit outline-3 :height 1.1))))
+  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
+  '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
+#+end_src
+
+** Appear
+This is the default configuration from the org appear github if I remember correctly.
+#+begin_src elisp
+(use-package! org-appear
+  :hook (org-mode . org-appear-mode)
+  :config
+  (setq org-appear-autoemphasis t
+        org-appear-autosubmarkers t
+        org-appear-autolinks nil)
+  (run-at-time nil nil #'org-appear--set-elements))
+#+end_src
+
+** Newlines
+Automatic newlines between heading so it feels less cramped.
+#+begin_src elisp
+(setq org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
+#+end_src
+
+** Modern
+Adds activates org modern by adding it to an org-mode hook.
+#+begin_src elisp
+(add-hook! 'org-mode-hook #'global-org-modern-mode)
+#+end_src
+
+** Location
+#+begin_src elisp
+(setq org-directory "~/org/")
+#+end_src
+* Modeline
+This just adds a word count to the modeline when in various text modes.
+#+begin_src elisp
+(after! doom-modeline
+  (setq!
+   doom-modeline-enable-word-count t
+   doom-modeline-continuous-word-count-modes
+   '(markdown-mode gfm-mode org-mode text-mode)))
+#+end_src
+
+* Evil
+** Snipe
+Makes evil snipe work across the whole line.
+#+begin_src elisp
+(after! evil-snipe
+  (evil-snipe-override-mode 1)
+  (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+  (setq
+   evil-snipe-scope 'whole-line
+   evil-snipe-repeat-scope 'whole-line))
+#+end_src
+
+** Movement
+I find vim's ~$~ and ~0~ quite unconfortable for moving around, same with ~{~ and  ~}~ for paragraphs, so I rebounds them to something more comfortable, sadly these get overrited in org, since it uses ~M-{h,j,k,l}~ for moving around blocks. Also the default behaviour for these keybinds is really weird and annoying and I hate it.
+#+begin_src elisp
+(map! :nvi "M-h" #'back-to-indentation
+      :nvi "M-j" #'forward-paragraph
+      :nvi "M-k" #'backward-paragraph
+      :nvi "M-l" #'end-of-line)
+#+end_src
+
+** Cursor
+#+begin_src elisp
+(setq evil-move-cursor-back nil)
+#+end_src
+
+** Word definition
+This removes underscores from the evil word definiton, (similar to vim) in c-like languages, swapping the definition of w and o, and making movement keys also behave like this.
+#+begin_src elisp
+(add-hook 'c-mode-common-hook
+          (lambda () (modify-syntax-entry ?_ "w"))
+          (defalias 'forward-evil-word 'forward-evil-symbol))
+
+(define-key evil-outer-text-objects-map "w" 'evil-a-symbol)
+(define-key evil-inner-text-objects-map "w" 'evil-inner-symbol)
+(define-key evil-outer-text-objects-map "o" 'evil-a-word)
+(define-key evil-inner-text-objects-map "o" 'evil-inner-word)
+#+end_src
+
+* Screen
+** Fullscreen on startup
+Doesn't do much when using a window manager like i3, but it's handy for Winblows.
+#+begin_src elisp
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+#+end_src
+
+** Transparency
+#+begin_src elisp
+(set-frame-parameter (selected-frame) 'alpha '(100 . 80))
+#+end_src
+
+* Yank from kill ring
+Brings that back from normal emacs mode because the kill ring is just plain better than registers or whatever vimmers cope with. Don't @ me.
+#+begin_src elisp
+(map! :desc "yank from kill ring" "M-y" #'yank-from-kill-ring)
+#+end_src
+
+* Path
+Excludes windows because it dies otherwise.
+#+begin_src elisp
+(unless IS-WINDOWS #'exec-path-from-shell-initialize)
+#+end_src
+
+* Rainbow mode
+Stolen from dt's config
+#+begin_src elisp
+(define-globalized-minor-mode global-rainbow-mode rainbow-mode
+  (lambda () (rainbow-mode 1)))
+(global-rainbow-mode 1)
+#+end_src
+
+* External Configuration Files
+** Init.el
+#+begin_src elisp :tangle init.el
+;;; init.el -*- lexical-binding: t; -*-
+
+(doom! :input
+       ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
+       ;;chinese
+       ;;japanese
+       ;;layout            ; auie,ctsrnm is the superior home row
+
+       :completion
+       (company +childframe)           ; the ultimate code completion backend
+       ;;helm              ; the *other* search engine for love and life
+       ;;ido               ; the other *other* search engine...
+       ;;ivy               ; a search engine for love and life
+       (vertico +icons)           ; the search engine of the future
+
+       :ui
+       ;;deft              ; notational velocity for Emacs
+       doom              ; what makes DOOM look the way it does
+       doom-dashboard    ; a nifty splash screen for Emacs
+       doom-quit         ; DOOM quit-message prompts when you quit Emacs
+       (emoji +unicode)  ; 🙂
+       hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
+       hydra
+       ;;indent-guides     ; highlighted indent columns
+       ;;ligatures         ; ligatures and symbols to make your code pretty again
+       ;;minimap           ; show a map of the code on the side
+       modeline          ; snazzy, Atom-inspired modeline, plus API
+       nav-flash         ; blink cursor line after big motions
+       ;;neotree           ; a project drawer, like NERDTree for vim
+       ophints           ; highlight the region an operation acts on
+       (popup +defaults)   ; tame sudden yet inevitable temporary windows
+       ;;tabs              ; a tab bar for Emacs
+       ;;treemacs          ; a project drawer, like neotree but cooler
+       unicode           ; extended unicode support for various languages
+       (vc-gutter +pretty) ; vcs diff in the fringe
+       vi-tilde-fringe   ; fringe tildes to mark beyond EOB
+       window-select     ; visually switch windows
+       workspaces        ; tab emulation, persistence & separate workspaces
+       ;;zen               ; distraction-free coding or writing
+
+       :editor
+       (evil +everywhere); come to the dark side, we have cookies
+       file-templates    ; auto-snippets for empty files
+       fold              ; (nigh) universal code folding
+       (format +onsave)  ; automated prettiness
+       ;;god               ; run Emacs commands without modifier keys
+       ;;lispy             ; vim for lisp, for people who don't like vim
+       multiple-cursors  ; editing in many places at once
+       ;;objed             ; text object editing for the innocent
+       ;;parinfer          ; turn lisp into python, sort of
+       ;;rotate-text       ; cycle region at point between text candidates
+       snippets          ; my elves. They type so I don't have to
+       word-wrap         ; soft wrapping with language-aware indent
+
+       :emacs
+       (dired +icons +dirvish)             ; making dired pretty [functional]
+       electric          ; smarter, keyword-based electric-indent
+       (ibuffer +icons)         ; interactive buffer management
+       (undo +tree)              ; persistent, smarter undo for your inevitable mistakes
+       vc                ; version-control and Emacs, sitting in a tree
+
+       :term
+       eshell            ; the elisp shell that works everywhere
+       ;;shell             ; simple shell REPL for Emacs
+       ;;term              ; basic terminal emulator for Emacs
+       (:if IS-LINUX vterm)             ; the best terminal emulation in Emacs
+
+       :checkers
+       (syntax +childframe)              ; tasing you for every semicolon you forget
+       (spell +flyspell) ; tasing you for misspelling mispelling
+       ;;grammar           ; tasing grammar mistake every you make
+
+       :tools
+       ;;ansible
+       ;;biblio            ; Writes a PhD for you (citation needed)
+       (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
+       ;;direnv
+       ;;docker
+       editorconfig      ; let someone else argue about tabs vs spaces
+       ;;ein               ; tame Jupyter notebooks with emacs
+       (eval +overlay)     ; run code, run (also, repls)
+       ;;gist              ; interacting with github gists
+       lookup              ; navigate your code and its documentation
+       (lsp +peek)               ; M-x vscode
+       (magit +forge)             ; a git porcelain for Emacs
+       ;;make              ; run make tasks from Emacs
+       ;;pass              ; password manager for nerds
+       pdf               ; pdf enhancements
+       ;;prodigy           ; FIXME managing external services & code builders
+       rgb               ; creating color strings
+       ;;taskrunner        ; taskrunner for all your projects
+       ;;terraform         ; infrastructure as code
+       ;;tmux              ; an API for interacting with tmux
+       tree-sitter       ; syntax and parsing, sitting in a tree...
+       ;;upload            ; map local to remote projects via ssh/ftp
+
+       :os
+       (:if IS-MAC macos)  ; improve compatibility with macOS
+       tty               ; improve the terminal Emacs experience
+
+       :lang
+       ;;agda              ; types of types of types of types...
+       ;;beancount         ; mind the GAAP
+       ;;(cc +lsp)         ; C > C++ == 1
+       ;;clojure           ; java with a lisp
+       ;;common-lisp       ; if you've seen one lisp, you've seen them all
+       ;;coq               ; proofs-as-programs
+       ;;crystal           ; ruby at the speed of c
+       (csharp +dotnet +lsp +tree-sitter)            ; unity, .NET, and mono shenanigans
+       ;;data              ; config/data formats
+       ;;(dart +flutter)   ; paint ui and not much else
+       ;;dhall
+       ;;elixir            ; erlang done right
+       ;;elm               ; care for a cup of TEA?
+       emacs-lisp        ; drown in parentheses
+       ;;erlang            ; an elegant language for a more civilized age
+       ;;ess               ; emacs speaks statistics
+       ;;factor
+       ;;faust             ; dsp, but you get to keep your soul
+       ;;fortran           ; in FORTRAN, GOD is REAL (unless declared INTEGER)
+       ;;fsharp            ; ML stands for Microsoft's Language
+       ;;fstar             ; (dependent) types and (monadic) effects and Z3
+       ;;gdscript          ; the language you waited for
+       ;;(go +lsp)         ; the hipster dialect
+       ;;(graphql +lsp)    ; Give queries a REST
+       ;;(haskell +lsp)    ; a language that's lazier than I am
+       ;;hy                ; readability of scheme w/ speed of python
+       ;;idris             ; a language you can depend on
+       (json +lsp +tree-sitter)              ; At least it ain't XML
+       ;;(java +lsp)       ; the poster child for carpal tunnel syndrome
+       ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
+       ;;julia             ; a better, faster MATLAB
+       ;;kotlin            ; a better, slicker Java(Script)
+       ;;latex             ; writing papers in Emacs has never been so fun
+       ;;lean              ; for folks with too much to prove
+       ;;ledger            ; be audit you can be
+       ;;lua               ; one-based indices? one-based indices
+       markdown          ; writing docs for people to ignore
+       ;;nim               ; python + lisp at the speed of c
+       ;;nix               ; I hereby declare "nix geht mehr!"
+       ;;ocaml             ; an objective camel
+       (org +pretty +dragndrop +pandoc +pomodoro)               ; organize your plain life in plain text
+       ;;php               ; perl's insecure younger brother
+       ;;plantuml          ; diagrams for confusing people more
+       ;;purescript        ; javascript, but functional
+       ;;python            ; beautiful is better than ugly
+       ;;qt                ; the 'cutest' gui framework ever
+       ;;racket            ; a DSL for DSLs
+       ;;raku              ; the artist formerly known as perl6
+       ;;rest              ; Emacs as a REST client
+       ;;rst               ; ReST in peace
+       ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+       (rust +lsp +tree-sitter)              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       ;;scala             ; java, but good
+       ;;(scheme +guile)   ; a fully conniving family of lisps
+       sh                ; she sells {ba,z,fi}sh shells on the C xor
+       ;;sml
+       ;;solidity          ; do you need a blockchain? No.
+       ;;swift             ; who asked for emoji variables?
+       ;;terra             ; Earth and Moon in alignment for performance.
+       ;;web               ; the tubes
+       (yaml +lsp)              ; JSON, but readable
+       ;;zig               ; C, but simpler
+
+       :email
+       ;;(mu4e +org +gmail)
+       ;;notmuch
+       ;;(wanderlust +gmail)
+
+       :app
+       ;;calendar
+       ;;emms
+       (:if IS-LINUX everywhere)        ; *leave* Emacs!? You must be joking
+       ;;irc               ; how neckbeards socialize
+       ;;(rss +org)        ; emacs as an RSS reader
+       ;;twitter           ; twitter client https://twitter.com/vnought
+
+       :config
+       literate
+       (default +bindings +smartparens))
+#+end_src
+
+** Packages.el
+This block exports to a list of package to install. Configuration is elsewhere.
+|------------------+------------------------------|
+| Name of Package  | Purpose                      |
+|------------------+------------------------------|
+| org-modern       | org-superstar but nicer      |
+| toml-mode        | for editing cargo.toml       |
+| i3wm-config-mode | self-explanatory             |
+| org-appear       | hides markdown intelligently |
+|------------------+------------------------------|
+
+#+begin_src elisp :tangle packages.el
+;;; packages.el -*- lexical-binding: t; -*-
+(package! org-modern)
+(package! toml-mode)
+(package! i3wm-config-mode)
+(package! exec-path-from-shell)
+(package! org-appear)
+#+end_src
