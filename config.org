@@ -420,4 +420,5 @@ This block exports to a list of package to install. Configuration is elsewhere.
 (package! i3wm-config-mode)
 (package! exec-path-from-shell)
 (package! org-appear)
+(unpin! forge)
 #+end_src
