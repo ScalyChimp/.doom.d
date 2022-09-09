@@ -20,6 +20,7 @@
   - [[#modeline][Modeline]]
 - [[#org][Org]]
   - [[#heading-size][Heading Size]]
+  - [[#edit-source-code-blocks][Edit source code blocks]]
   - [[#ignore-headings][Ignore Headings]]
   - [[#appear][Appear]]
   - [[#newlines][Newlines]]
@@ -100,6 +101,13 @@ Stolen from dt's doom config, this block slightly increases the size of org head
   '(org-level-3 ((t (:inherit outline-3 :height 1.1))))
   '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
   '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
+#+end_src
+** Edit source code blocks
+#+begin_src elisp
+(after! org
+  (map! :map org-mode-map
+        :localleader (:prefix ("j", "src blocks")
+        "s" #'org-edit-src-code)))
 #+end_src
 
 ** Ignore Headings
