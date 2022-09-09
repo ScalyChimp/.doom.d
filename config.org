@@ -1,6 +1,6 @@
 #+title: Doom Emacs Config
 #+author: scalychimp
-#+DESCRIPTION: scalychimp's insidous doom emacs config.
+#+DESCRIPTION: scalychimp's insidious doom emacs config.
 #+STARTUP: overview
 #+LAST_MODIFIED: <2022-30-18 Tue>
 
@@ -156,7 +156,7 @@ Makes evil snipe work across the whole line.
 #+end_src
 
 ** Movement
-I find vim's ~$~ and ~0~ quite unconfortable for moving around, same with ~{~ and  ~}~ for paragraphs, so I rebounds them to something more comfortable, sadly these get overrited in org, since it uses ~M-{h,j,k,l}~ for moving around blocks. Also the default behaviour for these keybinds is really weird and annoying and I hate it.
+I find vim's ~$~ and ~0~ quite uncomfortable for moving around, same with ~{~ and  ~}~ for paragraphs, so I rebounds them to something more comfortable, sadly these get overwritten in org, since it uses ~M-{h,j,k,l}~ for moving around blocks. Also the default behavior for these keybinds is really weird and annoying and I hate it.
 #+begin_src elisp
 (map! :nvi "M-h" #'back-to-indentation
       :nvi "M-j" #'forward-paragraph
@@ -170,7 +170,7 @@ I find vim's ~$~ and ~0~ quite unconfortable for moving around, same with ~{~ an
 #+end_src
 
 ** Word definition
-This removes underscores from the evil word definiton, (similar to vim) in c-like languages, swapping the definition of w and o, and making movement keys also behave like this.
+This removes underscores from the evil word definition, (similar to vim) in c-like languages, swapping the definition of w and o, and makes movement keys also behave like this.
 #+begin_src elisp
 (add-hook 'c-mode-common-hook
           (lambda () (modify-syntax-entry ?_ "w"))
