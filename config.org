@@ -36,6 +36,7 @@
   - [[#transparency][Transparency]]
 - [[#yank-from-kill-ring][Yank from kill ring]]
 - [[#exec-path-from-shell][Exec Path from shell]]
+- [[#company][Company]]
 - [[#rainbow-mode][Rainbow mode]]
 - [[#external-configuration-files][External Configuration Files]]
   - [[#initel][Init.el]]
@@ -210,6 +211,11 @@ Brings that back from normal emacs mode because the kill ring is just plain bett
 Excludes windows because it dies otherwise.
 #+begin_src elisp
 (unless IS-WINDOWS #'exec-path-from-shell-initialize)
+#+end_src
+* Company
+Removes completion delay.
+#+begin_src elisp
+(setq company-idle-delay 0)
 #+end_src
 
 * Rainbow mode
