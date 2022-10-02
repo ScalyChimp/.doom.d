@@ -34,6 +34,7 @@
 - [[#screen][Screen]]
   - [[#fullscreen-on-startup][Fullscreen on startup]]
   - [[#transparency][Transparency]]
+- [[#treemacs][Treemacs]]
 - [[#yank-from-kill-ring][Yank from kill ring]]
 - [[#exec-path-from-shell][Exec Path from shell]]
 - [[#company][Company]]
@@ -200,7 +201,11 @@ Doesn't do much when using a window manager like i3, but it's handy for Winblows
 (set-frame-parameter (selected-frame) 'alpha '(100 . 80))
 #+end_src
 
-Configures Affe (an asynchonus search tool) to include hidden files by changing the ripgrep command flags.
+* Treemacs
+Decrease width because otherwise it takes up too much of the screen.
+#+begin_src elisp
+(setq treemacs-width 24)
+#+end_src
 * Yank from kill ring
 Brings that back from normal emacs mode because the kill ring is just plain better than registers or whatever vimmers cope with. Don't @ me.
 #+begin_src elisp
