@@ -2,7 +2,7 @@
 #+author: scalychimp
 #+DESCRIPTION: scalychimp's insidious doom emacs config.
 #+STARTUP: overview
-#+LAST_MODIFIED: <2022-30-18 Tue>
+#+LAST_MODIFIED: <2022-10-23 Sun>
 
 
 * Table of Contents :toc:
@@ -20,8 +20,8 @@
   - [[#modeline][Modeline]]
 - [[#org][Org]]
   - [[#heading-size][Heading Size]]
-  - [[#edit-source-code-blocks][Edit source code blocks]]
   - [[#ignore-headings][Ignore Headings]]
+  - [[#edit-source-code-blocks][Edit source code blocks]]
   - [[#appear][Appear]]
   - [[#newlines][Newlines]]
   - [[#modern][Modern]]
@@ -35,10 +35,13 @@
   - [[#fullscreen-on-startup][Fullscreen on startup]]
   - [[#transparency][Transparency]]
 - [[#treemacs][Treemacs]]
+- [[#dap][DAP]]
+  - [[#test][test]]
 - [[#yank-from-kill-ring][Yank from kill ring]]
 - [[#exec-path-from-shell][Exec Path from shell]]
 - [[#company][Company]]
 - [[#rainbow-mode][Rainbow mode]]
+- [[#scroll-margin][Scroll margin]]
 - [[#external-configuration-files][External Configuration Files]]
   - [[#initel][Init.el]]
   - [[#packagesel][Packages.el]]
@@ -67,7 +70,7 @@ Dired is nice, however doom has no keybindings for it by default, however ~SPC d
 #+end_src
 ** Font
 #+begin_src elisp
-(setq doom-font (font-spec :family " JetBrains Mono Nerd Font" :size 18 :weight 'regular))
+(setq doom-font (font-spec :family "Fira Code Nerd Font" :size 18 :weight 'regular))
 #+end_src
 
 ** Theme
@@ -81,7 +84,7 @@ Dired is nice, however doom has no keybindings for it by default, however ~SPC d
 #+end_src
 
 ** Modeline
-This just adds a word count to the modeline when in various text modes like org and markdown.
+This adds a word count to the modeline when in various text modes like org and markdown.
 #+begin_src elisp
 (after! doom-modeline
   (setq!
@@ -92,7 +95,7 @@ This just adds a word count to the modeline when in various text modes like org 
 
 * Org
 ** Heading Size
-Stolen from dt's doom config, this block slightly increases the size of org headings, which I find makes them stand out more.
+Stolen from DistroTube's doom config, this block slightly increases the size of org headings, which helps make them stand out more.
 #+begin_src elisp
 (custom-set-faces
   '(org-level-1 ((t (:inherit outline-1 :height 1.3))))
@@ -101,20 +104,20 @@ Stolen from dt's doom config, this block slightly increases the size of org head
   '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
   '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
 #+end_src
-** Edit source code blocks
-#+begin_src elisp
-(after! org
-  (map! :map org-mode-map
-        :localleader (:prefix ("j", "src blocks")
-        "s" #'org-edit-src-code)))
-#+end_src
-
 ** Ignore Headings
 Don't export org headings for essays.
 #+begin_src elisp
 (after! ox
   (require 'ox-extra)
   (ox-extras-activate '(ignore-headlines)))
+#+end_src
+
+** Edit source code blocks
+Keybind for editing src blocks, which is handy when your init.el is in a src block, I'm surprised doom doesn't have a bind for this by default frankly.
+#+begin_src elisp
+(after! org
+  (map! :map org-mode-map
+        :localleader "j" #'org-edit-src-code))
 #+end_src
 
 ** Appear
@@ -172,12 +175,13 @@ I find vim's ~$~ and ~0~ quite uncomfortable for moving around, same with ~{~ an
 #+end_src
 
 ** Cursor
+This stops the cursor from moving when exiting insert mode, which I find to be quite annoying behaviour.
 #+begin_src elisp
 (setq evil-move-cursor-back nil)
 #+end_src
 
 ** Word definition
-This removes underscores from the evil word definition, (similar to vim) in c-like languages, swapping the definition of w and o, and makes movement keys also behave like this.
+This removes underscores from the evil word definition, (similar to vim) in c-like languages, swapping the definition of w and o, and makes movement keys also behave similar.
 #+begin_src elisp
 (add-hook 'c-mode-common-hook
           (lambda () (modify-syntax-entry ?_ "w"))
@@ -191,12 +195,13 @@ This removes underscores from the evil word definition, (similar to vim) in c-li
 
 * Screen
 ** Fullscreen on startup
-Doesn't do much when using a window manager like i3, but it's handy for Winblows.
+Doesn't do much when using a window manager like i3, but it's handy for Windows.
 #+begin_src elisp
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 #+end_src
 
 ** Transparency
+80 percent opacity when unfocused, handy to figure out what window is focused in i3 without borders.
 #+begin_src elisp
 (set-frame-parameter (selected-frame) 'alpha '(100 . 80))
 #+end_src
@@ -206,8 +211,30 @@ Decrease width because otherwise it takes up too much of the screen.
 #+begin_src elisp
 (setq treemacs-width 24)
 #+end_src
+* DAP
+** test
+#+begin_src elisp
+(setq dap-auto-configure-mode t)
+
+(require 'dap-cpptools)
+
+(with-eval-after-load 'dap-cpptools
+  (dap-register-debug-template "Rust::CppTools Run Configuration"
+                                 (list :type "cppdbg"
+                                       :request "launch"
+                                       :name "Rust::Run"
+                                       :MIMode "gdb"
+                                       :miDebuggerPath "rust-gdb"
+                                       :environment []
+                                       :program "${workspaceFolder}/target/debug/hello / replace with binary"
+                                       :cwd "${workspaceFolder}"
+                                       :console "internal"
+                                       :dap-compilation "cargo build"
+                                       :dap-compilation-dir "${workspaceFolder}")))
+
+#+end_src
 * Yank from kill ring
-Brings that back from normal emacs mode because the kill ring is just plain better than registers or whatever vimmers cope with. Don't @ me.
+Brings that back from normal emacs mode because the kill ring is just plain better than registers.
 #+begin_src elisp
 (map! :desc "yank from kill ring" "M-y" #'yank-from-kill-ring)
 #+end_src
@@ -231,6 +258,10 @@ Stolen from dt's config
 (global-rainbow-mode 1)
 #+end_src
 
+* Scroll margin
+#+begin_src elisp
+(setq! scroll-margin 6)
+#+end_src
 * External Configuration Files
 ** Init.el
 #+begin_src elisp :tangle init.el
@@ -254,7 +285,7 @@ Stolen from dt's config
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       (emoji +unicode)  ; 🙂
+       ;; (emoji +unicode)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        hydra
        indent-guides     ; highlighted indent columns
@@ -267,7 +298,7 @@ Stolen from dt's config
        (popup +defaults)   ; tame sudden yet inevitable temporary windows
        ;;tabs              ; a tab bar for Emacs
        (treemacs +lsp)          ; a project drawer, like neotree but cooler
-       unicode           ; extended unicode support for various languages
+       ;; unicode           ; extended unicode support for various languages
        (vc-gutter +pretty) ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        window-select     ; visually switch windows
@@ -283,7 +314,7 @@ Stolen from dt's config
        ;;lispy             ; vim for lisp, for people who don't like vim
        multiple-cursors  ; editing in many places at once
        ;;objed             ; text object editing for the innocent
-       ;;parinfer          ; turn lisp into python, sort of
+       parinfer          ; turn lisp into python, sort of
        ;;rotate-text       ; cycle region at point between text candidates
        snippets          ; my elves. They type so I don't have to
        word-wrap         ; soft wrapping with language-aware indent
@@ -338,11 +369,11 @@ Stolen from dt's config
        ;;agda              ; types of types of types of types...
        ;;beancount         ; mind the GAAP
        ;;(cc +lsp)         ; C > C++ == 1
-       ;;clojure           ; java with a lisp
-       ;;common-lisp       ; if you've seen one lisp, you've seen them all
+       ;; (clojure +lsp)           ; java with a lisp
+       common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
-       (csharp +dotnet +lsp +tree-sitter)            ; unity, .NET, and mono shenanigans
+       (csharp +lsp +tree-sitter)            ; unity, .NET, and mono shenanigans
        ;;data              ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
        ;;dhall
@@ -367,7 +398,7 @@ Stolen from dt's config
        ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
-       ;;latex             ; writing papers in Emacs has never been so fun
+       latex             ; writing papers in Emacs has never been so fun
        ;;lean              ; for folks with too much to prove
        ;;ledger            ; be audit you can be
        ;;lua               ; one-based indices? one-based indices
@@ -388,7 +419,7 @@ Stolen from dt's config
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        (rust +lsp +tree-sitter)              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
-       ;;(scheme +guile)   ; a fully conniving family of lisps
+       (scheme +guile)   ; a fully conniving family of lisps
        ;;sh                ; she sells {ba,z,fi}sh shells on the C xor
        ;;sml
        ;;solidity          ; do you need a blockchain? No.
@@ -399,7 +430,7 @@ Stolen from dt's config
        ;;zig               ; C, but simpler
 
        :email
-       ;;(mu4e +org +gmail)
+       (mu4e +org +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
 
@@ -415,7 +446,6 @@ Stolen from dt's config
        literate
        (default +bindings +smartparens))
 #+end_src
-
 
 ** Packages.el
 This block exports to a list of package to install. Configuration is elsewhere.
@@ -436,5 +466,4 @@ This block exports to a list of package to install. Configuration is elsewhere.
 (package! i3wm-config-mode)
 (package! exec-path-from-shell)
 (package! org-appear)
-(unpin! forge)
 #+end_src
