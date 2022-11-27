@@ -1,9 +1,8 @@
-#+title: Doom Emacs Config
-#+author: scalychimp
+#+TITLE: Doom Emacs Config
+#+AUTHOR: scalychimp
 #+DESCRIPTION: scalychimp's insidious doom emacs config.
 #+STARTUP: overview
-#+LAST_MODIFIED: <2022-10-23 Sun>
-
+#+LAST_EDITED: <2022-11-27 Sun 19:30>
 
 * Table of Contents :toc:
 :PROPERTIES:
@@ -152,6 +151,16 @@ Activates org modern by adding it to an org-mode hook.
 #+begin_src elisp
 (setq org-directory "~/org/")
 #+end_src
+** Time Stamps
+This changes the time stamp pattern to work on org options.
+#+begin_src elisp
+(add-hook 'org-mode-hook (lambda ()
+                             (setq-local time-stamp-active t
+                                         time-stamp-start "#\\+LAST_EDITED:[ \t]*"
+                                         time-stamp-end "$"
+                                         time-stamp-format "<%Y-%02m-%02d %3a %02H:%02M>")
+                             (add-hook 'before-save-hook 'time-stamp nil 'local)))
+#+end_src
 
 * Evil
 ** Snipe
@@ -260,7 +269,7 @@ Stolen from dt's config
 
 * Scroll margin
 #+begin_src elisp
-(setq! scroll-margin 6)
+(setq! scroll-margin 8)
 #+end_src
 * External Configuration Files
 ** Init.el
