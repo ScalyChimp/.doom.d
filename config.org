@@ -25,6 +25,7 @@
   - [[#newlines][Newlines]]
   - [[#modern][Modern]]
   - [[#location][Location]]
+  - [[#time-stamps][Time Stamps]]
 - [[#evil][Evil]]
   - [[#snipe][Snipe]]
   - [[#movement][Movement]]
@@ -69,7 +70,7 @@ Dired is nice, however doom has no keybindings for it by default, however ~SPC d
 #+end_src
 ** Font
 #+begin_src elisp
-(setq doom-font (font-spec :family "Fira Code Nerd Font" :size 18 :weight 'regular))
+(setq doom-font (font-spec :family "Jetbrains Mono" :size 18 :weight 'regular))
 #+end_src
 
 ** Theme
