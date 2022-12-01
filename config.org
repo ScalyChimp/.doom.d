@@ -2,7 +2,7 @@
 #+AUTHOR: scalychimp
 #+DESCRIPTION: scalychimp's insidious doom emacs config.
 #+STARTUP: overview
-#+LAST_EDITED: <2022-11-27 Sun 19:30>
+#+LAST_EDITED: <2022-12-01 Thu 16:24>
 
 * Table of Contents :toc:
 :PROPERTIES:
@@ -38,7 +38,6 @@
 - [[#dap][DAP]]
   - [[#test][test]]
 - [[#yank-from-kill-ring][Yank from kill ring]]
-- [[#exec-path-from-shell][Exec Path from shell]]
 - [[#company][Company]]
 - [[#rainbow-mode][Rainbow mode]]
 - [[#scroll-margin][Scroll margin]]
@@ -249,11 +248,6 @@ Brings that back from normal emacs mode because the kill ring is just plain bett
 (map! :desc "yank from kill ring" "M-y" #'yank-from-kill-ring)
 #+end_src
 
-* Exec Path from shell
-Excludes windows because it dies otherwise.
-#+begin_src elisp
-(unless IS-WINDOWS #'exec-path-from-shell-initialize)
-#+end_src
 * Company
 Removes completion delay.
 #+begin_src elisp
@@ -474,6 +468,5 @@ This block exports to a list of package to install. Configuration is elsewhere.
 (package! org-modern)
 (package! toml-mode)
 (package! i3wm-config-mode)
-(package! exec-path-from-shell)
 (package! org-appear)
 #+end_src
