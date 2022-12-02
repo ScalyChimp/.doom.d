@@ -2,7 +2,7 @@
 #+AUTHOR: scalychimp
 #+DESCRIPTION: scalychimp's insidious doom emacs config.
 #+STARTUP: overview
-#+LAST_EDITED: <2022-12-01 Thu 16:24>
+#+LAST_EDITED: <2022-12-02 Fri 14:46>
 
 * Table of Contents :toc:
 :PROPERTIES:
@@ -293,7 +293,7 @@ Stolen from dt's config
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        hydra
        indent-guides     ; highlighted indent columns
-       ligatures         ; ligatures and symbols to make your code pretty again
+       ;; ligatures         ; ligatures and symbols to make your code pretty again
        ;;minimap           ; show a map of the code on the side
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
@@ -410,7 +410,7 @@ Stolen from dt's config
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       (org +pretty +dragndrop +pandoc +pomodoro)               ; organize your plain life in plain text
+       org                ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
