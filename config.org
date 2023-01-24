@@ -2,7 +2,7 @@
 #+AUTHOR: scalychimp
 #+DESCRIPTION: scalychimp's insidious doom emacs config.
 #+STARTUP: overview
-#+LAST_EDITED: <2023-01-24 Tue 21:17>
+#+LAST_EDITED: <2023-01-24 Tue 22:16>
 
 * Table of Contents :toc:
 :PROPERTIES:
@@ -75,6 +75,8 @@ Dired is nice, however doom has no keybindings for it by default, however ~SPC d
 ** Theme
 #+begin_src elisp
 (setq doom-theme 'doom-gruvbox)
+(custom-set-faces!
+        '(tree-sitter-hl-face:doc :inherit tree-sitter-hl-face:comment))
 #+end_src
 
 ** Line Numbers
