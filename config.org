@@ -2,7 +2,7 @@
 #+AUTHOR: scalychimp
 #+DESCRIPTION: scalychimp's insidious doom emacs config.
 #+STARTUP: overview
-#+LAST_EDITED: <2022-12-23 Fri 15:33>
+#+LAST_EDITED: <2023-01-24 Tue 21:17>
 
 * Table of Contents :toc:
 :PROPERTIES:
@@ -26,6 +26,7 @@
   - [[#modern][Modern]]
   - [[#location][Location]]
   - [[#time-stamps][Time Stamps]]
+  - [[#ellipsis][Ellipsis]]
 - [[#evil][Evil]]
   - [[#snipe][Snipe]]
   - [[#cursor][Cursor]]
@@ -161,6 +162,12 @@ This changes the time stamp pattern to work on org options.
                              (add-hook 'before-save-hook 'time-stamp nil 'local)))
 #+end_src
 
+** Ellipsis
+#+begin_src elisp
+(setq org-ellipsis " ▼ ")
+(custom-set-faces!
+   '(org-ellipsis :foreground unspecified))
+#+end_src
 * Evil
 ** Snipe
 Makes evil snipe work across the whole line.
