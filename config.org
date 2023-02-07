@@ -69,7 +69,7 @@ Dired is nice, however doom has no keybindings for it by default, however ~SPC d
 #+end_src
 ** Font
 #+begin_src elisp
-(setq doom-font (font-spec :family "Jetbrains Mono" :size 18 :weight 'regular))
+(setq doom-font (font-spec :family "Hack" :size 20 :weight 'regular))
 #+end_src
 
 ** Theme
