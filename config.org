@@ -223,25 +223,29 @@ Decrease width because otherwise it takes up too much of the screen.
 * DAP
 ** test
 #+begin_src elisp
-(setq dap-auto-configure-mode t)
+(after! lsp-rust
+   (require 'dap-cpptools))
 
-(require 'dap-cpptools)
-
-(with-eval-after-load 'dap-cpptools
+(after! dap-cpptools
   (dap-register-debug-template "Rust::CppTools Run Configuration"
-                                 (list :type "cppdbg"
-                                       :request "launch"
-                                       :name "Rust::Run"
-                                       :MIMode "gdb"
-                                       :miDebuggerPath "rust-gdb"
-                                       :environment []
-                                       :program "${workspaceFolder}/target/debug/hello / replace with binary"
-                                       :cwd "${workspaceFolder}"
-                                       :console "internal"
-                                       :dap-compilation "cargo build"
-                                       :dap-compilation-dir "${workspaceFolder}")))
+                               (list :type "cppdbg"
+                                     :request "launch"
+                                     :name "Rust::Run"
+                                     :MIMode "gdb"
+                                     :miDebuggerPath "rust-gdb"
+                                     :environment []
+                                     :program "${workspaceFolder}/target/debug/"
+                                     :cwd "${workspaceFolder}"
+                                     :console "external"
+                                     :dap-compilation "cargo build"
+                                     :dap-compilation-dir "${workspaceFolder}")))
+
+(after! dap-mode
+  (dap-auto-configure-mode 1))
 
 #+end_src
+
+
 * Yank from kill ring
 Brings that back from normal emacs mode because the kill ring is just plain better than registers.
 #+begin_src elisp
