@@ -2,7 +2,7 @@
 #+AUTHOR: scalychimp
 #+DESCRIPTION: scalychimp's insidious doom emacs config.
 #+STARTUP: overview
-#+LAST_EDITED: <2023-01-24 Tue 22:16>
+#+LAST_EDITED: <2023-02-07 Tue 19:41>
 
 * Table of Contents :toc:
 :PROPERTIES:
@@ -176,10 +176,7 @@ Makes evil snipe work across the whole line.
 #+begin_src elisp
 (after! evil-snipe
   (evil-snipe-override-mode 1)
-  (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
-  (setq
-   evil-snipe-scope 'whole-line
-   evil-snipe-repeat-scope 'whole-line))
+  (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
 #+end_src
 
 
