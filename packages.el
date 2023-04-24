@@ -6,3 +6,6 @@
   :recipe (:host github
            :repo "anonimitoraf/exercism.el"))
 (package! org-appear)
+(package! prism
+  :recipe (:host github
+           :repo "alphapapa/prism.el"))
