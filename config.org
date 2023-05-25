@@ -2,7 +2,7 @@
 #+AUTHOR: scalychimp
 #+DESCRIPTION: scalychimp's insidious doom emacs config.
 #+STARTUP: overview
-#+LAST_EDITED: <2023-04-24 Mon 18:23>
+#+LAST_EDITED: <2023-05-21 Sun 09:14>
 
 * Table of Contents :toc:
 :PROPERTIES:
@@ -43,6 +43,7 @@
 - [[#scroll-margin][Scroll margin]]
 - [[#exercism][Exercism]]
 - [[#prism][Prism]]
+- [[#consult-imenu-project][Consult imenu project]]
 
 * Dired
 ** Keybindings
@@ -68,7 +69,7 @@ Dired is nice, however doom has no keybindings for it by default, however ~SPC d
 #+end_src
 ** Font
 #+begin_src elisp
-(setq doom-font (font-spec :family "Hack" :size 20 :weight 'regular))
+(setq doom-font (font-spec :family "IBM Plex Mono" :size 20 :weight 'regular))
 #+end_src
 
 ** Theme
@@ -284,3 +285,8 @@ Stolen from dt's config
 
 (map! :leader (:prefix-map ("t" . "toggle") :desc "Prism mode" "p" #'prism-mode))
 #+end_src
+
+* Consult imenu project
+ #+begin_src elisp
+(map! :leader :desc "imenu search project" "z" #'consult-imenu-multi)
+ #+end_src

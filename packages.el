@@ -11,3 +11,4 @@
 (package! prism
   :recipe (:host github
            :repo "alphapapa/prism.el"))
+(package! janet-mode)
