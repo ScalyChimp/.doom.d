@@ -67,6 +67,7 @@ Dired is nice, however doom has no keybindings for it by default, however ~SPC d
       user-mail-address "scalychimp@gmail.com")
 #+end_src
 ** Font
+Choices: Commit Mono, Hack, IBM Plex Mono, Jetbrains Mono, Source Code Pro, Inconsolata, Raleway
 #+begin_src elisp
 (setq doom-font (font-spec :family "IBM Plex Mono" :size 20 :weight 'regular))
 #+end_src
