@@ -283,7 +283,7 @@ Stolen from dt's config
       :desaturations '(5)
       :colors (-map #'doom-color '(violet blue green yellow orange red))))
 
-(map! :leader (:prefix-map ("t" . "toggle") :desc "Prism mode" "p" #'prism-mode))
+(map! :leader (:prefix-map ("t" . "toggle") :desc "Prism mode" "p" (cmd! (prism-mode 'toggle) (highlight-indent-guides-mode 'toggle))))
 #+end_src
 
 * Consult imenu project
