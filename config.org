@@ -39,7 +39,6 @@
   - [[#test][test]]
 - [[#yank-from-kill-ring][Yank from kill ring]]
 - [[#company][Company]]
-- [[#rainbow-mode][Rainbow mode]]
 - [[#scroll-margin][Scroll margin]]
 - [[#exercism][Exercism]]
 - [[#prism][Prism]]
@@ -252,14 +251,6 @@ Brings that back from normal emacs mode because the kill ring is just plain bett
 Removes completion delay.
 #+begin_src elisp
 (setq company-idle-delay 0)
-#+end_src
-
-* Rainbow mode
-Stolen from dt's config
-#+begin_src elisp
-(define-globalized-minor-mode global-rainbow-mode rainbow-mode
-  (lambda () (rainbow-mode 1)))
-(global-rainbow-mode 1)
 #+end_src
 
 * Scroll margin
