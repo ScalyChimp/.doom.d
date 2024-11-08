@@ -6,9 +6,7 @@
   :recipe (:host github
            :repo "anonimitoraf/exercism.el"))
 (package! org-appear)
-(package! dirvish
-  :pin "4b63cd2")
+(package! dirvish)
 (package! prism
   :recipe (:host github
            :repo "alphapapa/prism.el"))
-(package! janet-mode)

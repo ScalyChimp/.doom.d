@@ -2,12 +2,13 @@
 #+AUTHOR: scalychimp
 #+DESCRIPTION: scalychimp's insidious doom emacs config.
 #+STARTUP: overview
-#+LAST_EDITED: <2023-05-21 Sun 09:14>
+#+LAST_EDITED: <2024-11-08 Fri 14:46>
 
 * Table of Contents :toc:
 :PROPERTIES:
 :VISIBILITY: all
 :END:
+- [[#fix-fish-shell][Fix fish shell]]
 - [[#dired][Dired]]
   - [[#keybindings][Keybindings]]
   - [[#dirvish-override][Dirvish override]]
@@ -44,6 +45,10 @@
 - [[#prism][Prism]]
 - [[#consult-imenu-project][Consult imenu project]]
 
+* Fix fish shell
+#+begin_src elisp
+(setq shell-file-name (executable-find "bash"))
+#+end_src
 * Dired
 ** Keybindings
 Dired is nice, however doom has no keybindings for it by default, however ~SPC d~ is unused and makes keybindings both ergonomic and mnemonic.
@@ -69,7 +74,7 @@ Dired is nice, however doom has no keybindings for it by default, however ~SPC d
 ** Font
 Choices: Commit Mono, Hack, IBM Plex Mono, Jetbrains Mono, Source Code Pro, Inconsolata, Raleway
 #+begin_src elisp
-(setq doom-font (font-spec :family "IBM Plex Mono" :size 20 :weight 'regular))
+(setq doom-font (font-spec :family "Hack" :size 24 :weight 'regular))
 #+end_src
 
 ** Theme
